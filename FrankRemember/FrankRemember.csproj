@@ -70,4 +70,10 @@
 	  <Folder Include="Tools\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Views\PgLogHistory.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

@@ -10,4 +10,5 @@ public class Trip
     public double Toll { get; set; }
     public double Freight { get; set; }
     public List<Fuel>? FuelDetail { get; set; }
+    public bool IsCancelled { get; set; }
 }

@@ -1,14 +1,22 @@
 ﻿using FrankRemember.Models;
 using LiteDB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FrankRemember.Services;
 
-public class TripService
+public interface ITripService
+{
+    bool Exist { get; }
+
+    bool Delete(ObjectId id);
+    IEnumerable<Trip> GetAll();
+    Trip GetAllByDateRange(ObjectId id);
+    IEnumerable<Trip> GetAllByEndDateRange(DateTime startDate, DateTime endDate);
+    Trip GetAllById(ObjectId id);
+    string Insert(Trip Trip);
+    bool Update(Trip Trip);
+}
+
+public class TripService : ITripService
 {
     readonly ILiteCollection<Trip> collection;
 
@@ -26,6 +34,8 @@ public class TripService
     public bool Exist => collection.Count() > 0;
 
     public IEnumerable<Trip> GetAll() => collection.FindAll().Reverse();
+
+    public IEnumerable<Trip> GetAllByEndDateRange(DateTime startDate, DateTime endDate) => collection.Find(Query.And(Query.GTE("EndDate", startDate), Query.LTE("EndDate", endDate)));
 
     public Trip GetAllById(ObjectId id) => collection.FindById(id);
 

@@ -1,10 +1,13 @@
-﻿namespace FrankRemember
+﻿using FrankRemember.Views;
+
+namespace FrankRemember;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(PgLogHistory), typeof(PgLogHistory));
     }
 }

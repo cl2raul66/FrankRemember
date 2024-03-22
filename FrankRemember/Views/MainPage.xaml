@@ -3,6 +3,7 @@
     x:Class="FrankRemember.Views.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctk="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:FrankRemember.ViewModels"
     x:DataType="vm:MainPageViewModel"
     Shell.NavBarIsVisible="False">
@@ -12,9 +13,13 @@
         RowDefinitions="auto,*,auto,auto"
         RowSpacing="16">
         <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
-            <Label FontSize="Title" Text="Principal" />
+            <Label
+                FontSize="Title"
+                Text="Principal"
+                VerticalOptions="Center" />
             <HorizontalStackLayout Grid.Column="1" Spacing="8">
                 <Button
+                    Command="{Binding GoToLogHistoryCommand}"
                     FontFamily="icofont"
                     Text="{StaticResource History}"
                     ToolTipProperties.Text="Historial de registros" />
@@ -23,7 +28,8 @@
         <Label
             Grid.Row="1"
             FontAttributes="Bold"
-            FontSize="64"
+            FontSize="{OnIdiom Default='64',
+                               Phone='32'}"
             HorizontalOptions="Center"
             Text="{Binding TripStatus, Mode=OneWay, TargetNullValue='Sin viaje'}"
             TextTransform="Uppercase"
@@ -40,11 +46,13 @@
                     <Button
                         Command="{Binding EndOfTripCommand}"
                         FontFamily="icofont"
+                        IsEnabled="{Binding TripStatus, Mode=OneWay, Converter={ctk:IsNotNullConverter}}"
                         Text="{StaticResource UiPlayStop}"
                         ToolTipProperties.Text="Finalizar viaje" />
                     <Button
                         Command="{Binding CancelTripCommand}"
                         FontFamily="icofont"
+                        IsEnabled="{Binding TripStatus, Mode=OneWay, Converter={ctk:IsNotNullConverter}}"
                         Text="{StaticResource UiClose}"
                         ToolTipProperties.Text="Cancelar viaje" />
                     <BoxView
@@ -52,7 +60,9 @@
                         CornerRadius="2"
                         WidthRequest="2" />
                     <Button
+                        Command="{Binding RefuelCommand}"
                         FontFamily="icofont"
+                        IsEnabled="{Binding TripStatus, Mode=OneWay, Converter={ctk:IsNotNullConverter}}"
                         Text="{StaticResource EnergyOil}"
                         ToolTipProperties.Text="Recargar diesel" />
                     <BoxView

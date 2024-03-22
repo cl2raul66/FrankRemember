@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FrankRemember.Views.PgLogHistory"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:FrankRemember.ViewModels"
+    Title="Historial de registros"
+    x:DataType="vm:PgLogHistoryViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <Grid
+        Padding="16"
+        RowDefinitions="auto,auto,*,auto"
+        RowSpacing="16">
+        <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
+            <HorizontalStackLayout Spacing="8">
+                <Button
+                    Command="{Binding BackCommand}"
+                    FontFamily="icofont"
+                    Text="{StaticResource ArrowLeft}"
+                    ToolTipProperties.Text="Regresar" />
+                <Label
+                    FontSize="Title"
+                    Text="Historial de registros"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Grid>
+        <ScrollView Grid.Row="2">
+            <CollectionView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <VerticalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="16"
+                            VerticalOptions="Center">
+                            <Label
+                                FontFamily="icofont"
+                                FontSize="64"
+                                Text="{StaticResource UiBlock}"
+                                TextColor="{StaticResource Gray300}" />
+                            <Label Text="No hay registros" TextColor="{StaticResource Gray300}" />
+                        </VerticalStackLayout>
+                    </ContentView>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </ScrollView>
+        <Label
+            Grid.Row="3"
+            FontSize="Micro"
+            HorizontalOptions="Center"
+            Text="By RandA Media Lab, Group" />
+    </Grid>
+
+</ContentPage>

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using FrankRemember.Services;
 using FrankRemember.ViewModels;
 using FrankRemember.Views;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,10 @@ public static class MauiProgram
                 fonts.AddFont("icofont.ttf", "icofont");
             });
 
+        builder.Services.AddSingleton<ITripService, TripService>();
+
         builder.Services.AddTransient<MainPage, MainPageViewModel>();
+        builder.Services.AddTransient<PgLogHistory, PgLogHistoryViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
