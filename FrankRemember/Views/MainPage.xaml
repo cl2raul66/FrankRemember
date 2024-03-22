@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="FrankRemember.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:FrankRemember.ViewModels"
+    x:DataType="vm:MainPageViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <Grid
+        Padding="16"
+        RowDefinitions="auto,*,auto,auto"
+        RowSpacing="16">
+        <Grid ColumnDefinitions="*,auto" ColumnSpacing="8">
+            <Label FontSize="Title" Text="Principal" />
+            <HorizontalStackLayout Grid.Column="1" Spacing="8">
+                <Button
+                    FontFamily="icofont"
+                    Text="{StaticResource History}"
+                    ToolTipProperties.Text="Historial de registros" />
+            </HorizontalStackLayout>
+        </Grid>
+        <Label
+            Grid.Row="1"
+            FontAttributes="Bold"
+            FontSize="64"
+            HorizontalOptions="Center"
+            Text="{Binding TripStatus, Mode=OneWay, TargetNullValue='Sin viaje'}"
+            TextTransform="Uppercase"
+            VerticalOptions="Center" />
+        <Frame Grid.Row="2">
+            <VerticalStackLayout Spacing="16">
+                <Label FontSize="Subtitle" Text="Accesos rápidos" />
+                <HorizontalStackLayout Spacing="8">
+                    <Button
+                        Command="{Binding StartTripCommand}"
+                        FontFamily="icofont"
+                        Text="{StaticResource UiPlay}"
+                        ToolTipProperties.Text="Iniciar viaje" />
+                    <Button
+                        Command="{Binding EndOfTripCommand}"
+                        FontFamily="icofont"
+                        Text="{StaticResource UiPlayStop}"
+                        ToolTipProperties.Text="Finalizar viaje" />
+                    <Button
+                        Command="{Binding CancelTripCommand}"
+                        FontFamily="icofont"
+                        Text="{StaticResource UiClose}"
+                        ToolTipProperties.Text="Cancelar viaje" />
+                    <BoxView
+                        BackgroundColor="{StaticResource Gray300}"
+                        CornerRadius="2"
+                        WidthRequest="2" />
+                    <Button
+                        FontFamily="icofont"
+                        Text="{StaticResource EnergyOil}"
+                        ToolTipProperties.Text="Recargar diesel" />
+                    <BoxView
+                        BackgroundColor="{StaticResource Gray300}"
+                        CornerRadius="2"
+                        WidthRequest="2" />
+                    <Button
+                        FontFamily="icofont"
+                        Text="{StaticResource UiRateAdd}"
+                        ToolTipProperties.Text="Generar registro" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+        <Label
+            Grid.Row="3"
+            FontSize="Micro"
+            HorizontalOptions="Center"
+            Text="By RandA Media Lab, Group" />
+    </Grid>
+
+</ContentPage>
